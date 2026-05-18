@@ -1,0 +1,12 @@
+
+CompileFlags:
+  CompilationDatabase: "."
+  Add:
+    - "-target"
+    - "arm-none-eabi"
+Config:
+  QueryDriver:
+    -"usr/bin/arm-none-eabi-*"-"usr/bin/arm-none-eabi-*"
+
+
+

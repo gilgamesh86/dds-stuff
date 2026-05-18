@@ -1,0 +1,158 @@
+[
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/synthV1.dir/Core/Src/main.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/main.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/main.c",
+  "output": "CMakeFiles/synthV1.dir/Core/Src/main.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/synthV1.dir/Core/Src/stm32g4xx_it.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/stm32g4xx_it.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/stm32g4xx_it.c",
+  "output": "CMakeFiles/synthV1.dir/Core/Src/stm32g4xx_it.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/synthV1.dir/Core/Src/stm32g4xx_hal_msp.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/stm32g4xx_hal_msp.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/stm32g4xx_hal_msp.c",
+  "output": "CMakeFiles/synthV1.dir/Core/Src/stm32g4xx_hal_msp.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/synthV1.dir/Core/Src/sysmem.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/sysmem.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/sysmem.c",
+  "output": "CMakeFiles/synthV1.dir/Core/Src/sysmem.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/synthV1.dir/Core/Src/syscalls.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/syscalls.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/syscalls.c",
+  "output": "CMakeFiles/synthV1.dir/Core/Src/syscalls.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -x assembler-with-cpp -MMD -MP -g -o CMakeFiles/synthV1.dir/startup_stm32g431xx.s.obj -c /home/sanchit/stm32/synthV1/startup_stm32g431xx.s",
+  "file": "/home/sanchit/stm32/synthV1/startup_stm32g431xx.s",
+  "output": "CMakeFiles/synthV1.dir/startup_stm32g431xx.s.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj -c /home/sanchit/stm32/synthV1/Core/Src/system_stm32g4xx.c",
+  "file": "/home/sanchit/stm32/synthV1/Core/Src/system_stm32g4xx.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32g4xx.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cordic.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2s.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2s.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2s.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_i2s.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart.c.obj"
+},
+{
+  "directory": "/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx",
+  "command": "/usr/bin/arm-none-eabi-gcc -DDEBUG -DSTM32G431xx -DUSE_HAL_DRIVER -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Core/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/STM32G4xx_HAL_Driver/Inc/Legacy -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Device/ST/STM32G4xx/Include -I/home/sanchit/stm32/synthV1/cmake/stm32cubemx/../../Drivers/CMSIS/Include  -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard  -Wall -fdata-sections -ffunction-sections -fstack-usage -O0 -g3 -std=gnu11 -o CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj -c /home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c",
+  "file": "/home/sanchit/stm32/synthV1/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c",
+  "output": "cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_uart_ex.c.obj"
+}
+]

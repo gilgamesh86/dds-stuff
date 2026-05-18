@@ -1,0 +1,15 @@
+/home/sanchit/stm32/synthV1/Core/Src/main.c:74:6:fillFirstHalf	536	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:85:6:fillSecondHalf	536	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:106:5:main	40	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:176:6:SystemClock_Config	88	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:220:13:MX_CORDIC_Init	8	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:243:13:MX_I2S2_Init	8	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:272:13:MX_TIM1_Init	40	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:314:13:MX_TIM4_Init	40	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:354:13:MX_USART1_UART_Init	8	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:396:13:MX_DMA_Init	16	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:419:13:MX_GPIO_Init	48	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:447:6:HAL_TIM_PeriodElapsedCallback	16	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:453:6:HAL_I2S_TxHalfCpltCallback	16	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:454:6:HAL_I2S_TxCpltCallback	16	static
+/home/sanchit/stm32/synthV1/Core/Src/main.c:462:6:Error_Handler	4	static

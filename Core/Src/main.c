@@ -82,9 +82,8 @@ void fillFirstHalf() {
                        HAL_MAX_DELAY);
 
   for (int i = 0; i < 128; i++) {
-    uint32_t unswap = (uint32_t)smallassBufferOUT[i];
-    bigassBuffer[2 * i] = ((unswap << 16) | (unswap >> 16));
-    bigassBuffer[(2 * i) + 1] = ((unswap << 16) | (unswap >> 16));
+    bigassBuffer[2 * i] = smallassBufferOUT[i];
+    bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i];
   }
 }
 void fillSecondHalf() {
@@ -99,9 +98,9 @@ void fillSecondHalf() {
                        HAL_MAX_DELAY);
 
   for (int i = 0; i < 128; i++) {
-    uint32_t unswap = (uint32_t)smallassBufferOUT[i];
-    bigassBuffer[(2 * i) + 256] = ((unswap << 16) | (unswap >> 16));
-    bigassBuffer[(2 * i) + 257] = ((unswap << 16) | (unswap >> 16));
+
+    bigassBuffer[(2 * i) + 256] = smallassBufferOUT[i];
+    bigassBuffer[(2 * i) + 257] = smallassBufferOUT[i];
   }
 } /* USER CODE END PFP */
 
@@ -160,7 +159,7 @@ int main(void) {
   }
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_TIM_Base_Start_IT(&htim1);
-  HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t *)bigassBuffer, 256);
+  HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t *)bigassBuffer, 512);
 
   /* USER CODE END 2 */
 

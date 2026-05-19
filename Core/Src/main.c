@@ -18,7 +18,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32g4xx_hal_i2s.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -57,7 +56,7 @@ UART_HandleTypeDef huart1;
 volatile uint8_t flagSet = 0;
 volatile uint8_t mainTimFlag = 0;
 const int phaseStep = 39595735;
-int32_t bigassBuffer[256] = {0};
+int32_t bigassBuffer[512] = {0};
 uint32_t phaseAcc = 0;
 /* USER CODE END PV */
 
@@ -73,26 +72,38 @@ static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 void fillFirstHalf() {
 
-  int32_t smallassBuffer[128] = {0};
-
+  int32_t smallassBufferIN[128] = {0};
+  int32_t smallassBufferOUT[128] = {0};
   for (int i = 0; i < 128; i++) {
-    smallassBuffer[i] = phaseAcc;
+    smallassBufferIN[i] = phaseAcc;
     phaseAcc += phaseStep;
   }
-  HAL_CORDIC_Calculate(&hcordic, smallassBuffer, &bigassBuffer[0], 128,
+  HAL_CORDIC_Calculate(&hcordic, smallassBufferIN, smallassBufferOUT, 128,
                        HAL_MAX_DELAY);
+
+  for (int i = 0; i < 128; i++) {
+    uint32_t unswap = (uint32_t)smallassBufferOUT[i];
+    bigassBuffer[2 * i] = ((unswap << 16) | (unswap >> 16));
+    bigassBuffer[(2 * i) + 1] = ((unswap << 16) | (unswap >> 16));
+  }
 }
 void fillSecondHalf() {
-  int32_t smallassBuffer[128] = {0};
+
+  int32_t smallassBufferIN[128] = {0};
+  int32_t smallassBufferOUT[128] = {0};
   for (int i = 0; i < 128; i++) {
-    smallassBuffer[i] = phaseAcc;
+    smallassBufferIN[i] = phaseAcc;
     phaseAcc += phaseStep;
   }
-  HAL_CORDIC_Calculate(&hcordic, smallassBuffer, &bigassBuffer[128], 128,
+  HAL_CORDIC_Calculate(&hcordic, smallassBufferIN, smallassBufferOUT, 128,
                        HAL_MAX_DELAY);
-}
 
-/* USER CODE END PFP */
+  for (int i = 0; i < 128; i++) {
+    uint32_t unswap = (uint32_t)smallassBufferOUT[i];
+    bigassBuffer[(2 * i) + 256] = ((unswap << 16) | (unswap >> 16));
+    bigassBuffer[(2 * i) + 257] = ((unswap << 16) | (unswap >> 16));
+  }
+} /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
@@ -149,7 +160,7 @@ int main(void) {
   }
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_TIM_Base_Start_IT(&htim1);
-  HAL_I2S_Transmit_DMA(&hi2s2, (void *)bigassBuffer, 512);
+  HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t *)bigassBuffer, 256);
 
   /* USER CODE END 2 */
 

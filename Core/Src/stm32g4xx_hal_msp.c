@@ -62,9 +62,10 @@ extern DMA_HandleTypeDef hdma_spi2_tx;
 
 /* USER CODE END 0 */
 /**
- * Initializes the Global MSP.
- */
-void HAL_MspInit(void) {
+  * Initializes the Global MSP.
+  */
+void HAL_MspInit(void)
+{
 
   /* USER CODE BEGIN MspInit 0 */
 
@@ -76,7 +77,7 @@ void HAL_MspInit(void) {
   /* System interrupt init*/
 
   /** Disable the internal Pull-Up in Dead Battery pins of UCPD peripheral
-   */
+  */
   HAL_PWREx_DisableUCPDDeadBattery();
 
   /* USER CODE BEGIN MspInit 1 */
@@ -85,13 +86,15 @@ void HAL_MspInit(void) {
 }
 
 /**
- * @brief CORDIC MSP Initialization
- * This function configures the hardware resources used in this example
- * @param hcordic: CORDIC handle pointer
- * @retval None
- */
-void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef *hcordic) {
-  if (hcordic->Instance == CORDIC) {
+  * @brief CORDIC MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param hcordic: CORDIC handle pointer
+  * @retval None
+  */
+void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef* hcordic)
+{
+  if(hcordic->Instance==CORDIC)
+  {
     /* USER CODE BEGIN CORDIC_MspInit 0 */
 
     /* USER CODE END CORDIC_MspInit 0 */
@@ -109,11 +112,12 @@ void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef *hcordic) {
     hdma_cordic_read.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
     hdma_cordic_read.Init.Mode = DMA_NORMAL;
     hdma_cordic_read.Init.Priority = DMA_PRIORITY_LOW;
-    if (HAL_DMA_Init(&hdma_cordic_read) != HAL_OK) {
+    if (HAL_DMA_Init(&hdma_cordic_read) != HAL_OK)
+    {
       Error_Handler();
     }
 
-    __HAL_LINKDMA(hcordic, hdmaOut, hdma_cordic_read);
+    __HAL_LINKDMA(hcordic,hdmaOut,hdma_cordic_read);
 
     /* CORDIC_WRITE Init */
     hdma_cordic_write.Instance = DMA1_Channel3;
@@ -125,11 +129,12 @@ void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef *hcordic) {
     hdma_cordic_write.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
     hdma_cordic_write.Init.Mode = DMA_NORMAL;
     hdma_cordic_write.Init.Priority = DMA_PRIORITY_LOW;
-    if (HAL_DMA_Init(&hdma_cordic_write) != HAL_OK) {
+    if (HAL_DMA_Init(&hdma_cordic_write) != HAL_OK)
+    {
       Error_Handler();
     }
 
-    __HAL_LINKDMA(hcordic, hdmaIn, hdma_cordic_write);
+    __HAL_LINKDMA(hcordic,hdmaIn,hdma_cordic_write);
 
     /* CORDIC interrupt Init */
     HAL_NVIC_SetPriority(CORDIC_IRQn, 0, 0);
@@ -137,17 +142,21 @@ void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef *hcordic) {
     /* USER CODE BEGIN CORDIC_MspInit 1 */
 
     /* USER CODE END CORDIC_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief CORDIC MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param hcordic: CORDIC handle pointer
- * @retval None
- */
-void HAL_CORDIC_MspDeInit(CORDIC_HandleTypeDef *hcordic) {
-  if (hcordic->Instance == CORDIC) {
+  * @brief CORDIC MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param hcordic: CORDIC handle pointer
+  * @retval None
+  */
+void HAL_CORDIC_MspDeInit(CORDIC_HandleTypeDef* hcordic)
+{
+  if(hcordic->Instance==CORDIC)
+  {
     /* USER CODE BEGIN CORDIC_MspDeInit 0 */
 
     /* USER CODE END CORDIC_MspDeInit 0 */
@@ -164,27 +173,31 @@ void HAL_CORDIC_MspDeInit(CORDIC_HandleTypeDef *hcordic) {
 
     /* USER CODE END CORDIC_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief I2S MSP Initialization
- * This function configures the hardware resources used in this example
- * @param hi2s: I2S handle pointer
- * @retval None
- */
-void HAL_I2S_MspInit(I2S_HandleTypeDef *hi2s) {
+  * @brief I2S MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param hi2s: I2S handle pointer
+  * @retval None
+  */
+void HAL_I2S_MspInit(I2S_HandleTypeDef* hi2s)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  if (hi2s->Instance == SPI2) {
+  if(hi2s->Instance==SPI2)
+  {
     /* USER CODE BEGIN SPI2_MspInit 0 */
 
     /* USER CODE END SPI2_MspInit 0 */
 
-    /** Initializes the peripherals clocks
-     */
+  /** Initializes the peripherals clocks
+  */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2S;
     PeriphClkInit.I2sClockSelection = RCC_I2SCLKSOURCE_SYSCLK;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
       Error_Handler();
     }
 
@@ -197,7 +210,7 @@ void HAL_I2S_MspInit(I2S_HandleTypeDef *hi2s) {
     PB13     ------> I2S2_CK
     PB15     ------> I2S2_SD
     */
-    GPIO_InitStruct.Pin = GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_15;
+    GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_15;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -215,11 +228,12 @@ void HAL_I2S_MspInit(I2S_HandleTypeDef *hi2s) {
     hdma_spi2_tx.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
     hdma_spi2_tx.Init.Mode = DMA_CIRCULAR;
     hdma_spi2_tx.Init.Priority = DMA_PRIORITY_LOW;
-    if (HAL_DMA_Init(&hdma_spi2_tx) != HAL_OK) {
+    if (HAL_DMA_Init(&hdma_spi2_tx) != HAL_OK)
+    {
       Error_Handler();
     }
 
-    __HAL_LINKDMA(hi2s, hdmatx, hdma_spi2_tx);
+    __HAL_LINKDMA(hi2s,hdmatx,hdma_spi2_tx);
 
     /* I2S2 interrupt Init */
     HAL_NVIC_SetPriority(SPI2_IRQn, 0, 0);
@@ -227,17 +241,21 @@ void HAL_I2S_MspInit(I2S_HandleTypeDef *hi2s) {
     /* USER CODE BEGIN SPI2_MspInit 1 */
 
     /* USER CODE END SPI2_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief I2S MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param hi2s: I2S handle pointer
- * @retval None
- */
-void HAL_I2S_MspDeInit(I2S_HandleTypeDef *hi2s) {
-  if (hi2s->Instance == SPI2) {
+  * @brief I2S MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param hi2s: I2S handle pointer
+  * @retval None
+  */
+void HAL_I2S_MspDeInit(I2S_HandleTypeDef* hi2s)
+{
+  if(hi2s->Instance==SPI2)
+  {
     /* USER CODE BEGIN SPI2_MspDeInit 0 */
 
     /* USER CODE END SPI2_MspDeInit 0 */
@@ -249,7 +267,7 @@ void HAL_I2S_MspDeInit(I2S_HandleTypeDef *hi2s) {
     PB13     ------> I2S2_CK
     PB15     ------> I2S2_SD
     */
-    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_15);
+    HAL_GPIO_DeInit(GPIOB, GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_15);
 
     /* I2S2 DMA DeInit */
     HAL_DMA_DeInit(hi2s->hdmatx);
@@ -260,16 +278,19 @@ void HAL_I2S_MspDeInit(I2S_HandleTypeDef *hi2s) {
 
     /* USER CODE END SPI2_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief TIM_Base MSP Initialization
- * This function configures the hardware resources used in this example
- * @param htim_base: TIM_Base handle pointer
- * @retval None
- */
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim_base) {
-  if (htim_base->Instance == TIM1) {
+  * @brief TIM_Base MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param htim_base: TIM_Base handle pointer
+  * @retval None
+  */
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM1)
+  {
     /* USER CODE BEGIN TIM1_MspInit 0 */
 
     /* USER CODE END TIM1_MspInit 0 */
@@ -278,7 +299,9 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim_base) {
     /* USER CODE BEGIN TIM1_MspInit 1 */
 
     /* USER CODE END TIM1_MspInit 1 */
-  } else if (htim_base->Instance == TIM4) {
+  }
+  else if(htim_base->Instance==TIM4)
+  {
     /* USER CODE BEGIN TIM4_MspInit 0 */
 
     /* USER CODE END TIM4_MspInit 0 */
@@ -291,16 +314,19 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim_base) {
 
     /* USER CODE END TIM4_MspInit 1 */
   }
+
 }
 
 /**
- * @brief TIM_Base MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param htim_base: TIM_Base handle pointer
- * @retval None
- */
-void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *htim_base) {
-  if (htim_base->Instance == TIM1) {
+  * @brief TIM_Base MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param htim_base: TIM_Base handle pointer
+  * @retval None
+  */
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
+{
+  if(htim_base->Instance==TIM1)
+  {
     /* USER CODE BEGIN TIM1_MspDeInit 0 */
 
     /* USER CODE END TIM1_MspDeInit 0 */
@@ -309,7 +335,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *htim_base) {
     /* USER CODE BEGIN TIM1_MspDeInit 1 */
 
     /* USER CODE END TIM1_MspDeInit 1 */
-  } else if (htim_base->Instance == TIM4) {
+  }
+  else if(htim_base->Instance==TIM4)
+  {
     /* USER CODE BEGIN TIM4_MspDeInit 0 */
 
     /* USER CODE END TIM4_MspDeInit 0 */
@@ -322,27 +350,31 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *htim_base) {
 
     /* USER CODE END TIM4_MspDeInit 1 */
   }
+
 }
 
 /**
- * @brief UART MSP Initialization
- * This function configures the hardware resources used in this example
- * @param huart: UART handle pointer
- * @retval None
- */
-void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
+  * @brief UART MSP Initialization
+  * This function configures the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspInit(UART_HandleTypeDef* huart)
+{
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-  if (huart->Instance == USART1) {
+  if(huart->Instance==USART1)
+  {
     /* USER CODE BEGIN USART1_MspInit 0 */
 
     /* USER CODE END USART1_MspInit 0 */
 
-    /** Initializes the peripherals clocks
-     */
+  /** Initializes the peripherals clocks
+  */
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USART1;
     PeriphClkInit.Usart1ClockSelection = RCC_USART1CLKSOURCE_PCLK2;
-    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+    {
       Error_Handler();
     }
 
@@ -372,17 +404,21 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart) {
     /* USER CODE BEGIN USART1_MspInit 1 */
 
     /* USER CODE END USART1_MspInit 1 */
+
   }
+
 }
 
 /**
- * @brief UART MSP De-Initialization
- * This function freeze the hardware resources used in this example
- * @param huart: UART handle pointer
- * @retval None
- */
-void HAL_UART_MspDeInit(UART_HandleTypeDef *huart) {
-  if (huart->Instance == USART1) {
+  * @brief UART MSP De-Initialization
+  * This function freeze the hardware resources used in this example
+  * @param huart: UART handle pointer
+  * @retval None
+  */
+void HAL_UART_MspDeInit(UART_HandleTypeDef* huart)
+{
+  if(huart->Instance==USART1)
+  {
     /* USER CODE BEGIN USART1_MspDeInit 0 */
 
     /* USER CODE END USART1_MspDeInit 0 */
@@ -401,6 +437,7 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart) {
 
     /* USER CODE END USART1_MspDeInit 1 */
   }
+
 }
 
 /* USER CODE BEGIN 1 */

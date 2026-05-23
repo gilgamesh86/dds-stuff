@@ -55,8 +55,8 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 volatile uint8_t flagSet = 0;
 volatile uint8_t mainTimFlag = 0;
-const int phaseStep = 39595735;
-int32_t bigassBuffer[512] = {0};
+const int phaseStep = 89478485;
+int16_t bigassBuffer[512] = {0};
 uint32_t phaseAcc = 0;
 /* USER CODE END PV */
 
@@ -65,10 +65,10 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_DMA_Init(void);
 static void MX_CORDIC_Init(void);
-static void MX_I2S2_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM1_Init(void);
+static void MX_I2S2_Init(void);
 /* USER CODE BEGIN PFP */
 void fillFirstHalf() {
 
@@ -82,8 +82,8 @@ void fillFirstHalf() {
                        HAL_MAX_DELAY);
 
   for (int i = 0; i < 128; i++) {
-    bigassBuffer[2 * i] = smallassBufferOUT[i];
-    bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i];
+    bigassBuffer[2 * i] = smallassBufferOUT[i] >> 16;
+    bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i] >> 16;
   }
 }
 void fillSecondHalf() {
@@ -99,10 +99,11 @@ void fillSecondHalf() {
 
   for (int i = 0; i < 128; i++) {
 
-    bigassBuffer[(2 * i) + 256] = smallassBufferOUT[i];
-    bigassBuffer[(2 * i) + 257] = smallassBufferOUT[i];
+    bigassBuffer[(2 * i) + 256] = smallassBufferOUT[i] >> 16;
+    bigassBuffer[(2 * i) + 257] = smallassBufferOUT[i] >> 16;
   }
-} /* USER CODE END PFP */
+}
+/* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
@@ -141,10 +142,10 @@ int main(void) {
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_CORDIC_Init();
-  MX_I2S2_Init();
   MX_USART1_UART_Init();
   MX_TIM4_Init();
   MX_TIM1_Init();
+  MX_I2S2_Init();
   /* USER CODE BEGIN 2 */
   CORDIC_ConfigTypeDef cordic;
   cordic.Function = CORDIC_FUNCTION_SINE;
@@ -159,7 +160,8 @@ int main(void) {
   }
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_TIM_Base_Start_IT(&htim1);
-  HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t *)bigassBuffer, 512);
+  HAL_StatusTypeDef i2sStatus;
+  i2sStatus = HAL_I2S_Transmit_DMA(&hi2s2, (uint16_t *)bigassBuffer, 512);
 
   /* USER CODE END 2 */
 
@@ -262,7 +264,7 @@ static void MX_I2S2_Init(void) {
   hi2s2.Instance = SPI2;
   hi2s2.Init.Mode = I2S_MODE_MASTER_TX;
   hi2s2.Init.Standard = I2S_STANDARD_PHILIPS;
-  hi2s2.Init.DataFormat = I2S_DATAFORMAT_32B;
+  hi2s2.Init.DataFormat = I2S_DATAFORMAT_16B;
   hi2s2.Init.MCLKOutput = I2S_MCLKOUTPUT_DISABLE;
   hi2s2.Init.AudioFreq = I2S_AUDIOFREQ_48K;
   hi2s2.Init.CPOL = I2S_CPOL_LOW;

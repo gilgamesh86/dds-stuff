@@ -1,6 +1,0 @@
-/home/sanchit/stm32/synthV1/build/CMakeFiles/synthV1.dir
-/home/sanchit/stm32/synthV1/build/CMakeFiles/edit_cache.dir
-/home/sanchit/stm32/synthV1/build/CMakeFiles/rebuild_cache.dir
-/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir
-/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
-/home/sanchit/stm32/synthV1/build/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

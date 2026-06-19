@@ -1,0 +1,35 @@
+# Build output
+build/
+cmake/
+
+# Compiled objects & binaries
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.map
+*.lst
+*.a
+*.d
+*.su
+
+# CMake generated
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CMakePresets.json
+
+# STM32CubeIDE / ioc (keep the .ioc since it's your config)
+*.ioc.bak
+
+# Linker & startup (optional — keep if custom, ignore if generated)
+# *.ld
+# startup_*.s
+
+# Misc
+*.bak
+*~
+.DS_Store
+

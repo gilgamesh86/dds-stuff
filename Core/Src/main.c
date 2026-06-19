@@ -56,7 +56,7 @@ UART_HandleTypeDef huart1;
 volatile uint8_t flagSet = 0;
 volatile uint8_t mainTimFlag = 0;
 uint32_t phaseAcc = 0;
-const int phaseStep = 39235661;
+int phaseStep = 21743271;
 int16_t bigassBuffer[512] = {0};
 const int16_t aaaaSample[326] = {
     510,    510,    690,    690,    888,    888,    1212,   1212,   1541,
@@ -109,7 +109,8 @@ static void MX_TIM1_Init(void);
 static void MX_I2S2_Init(void);
 /* USER CODE BEGIN PFP */
 void fillFirstHalf() {
-
+  /* this is for sine wave
+   *
   int32_t smallassBufferIN[128] = {0};
   int32_t smallassBufferOUT[128] = {0};
   for (int i = 0; i < 128; i++) {
@@ -123,9 +124,19 @@ void fillFirstHalf() {
     bigassBuffer[2 * i] = smallassBufferOUT[i] >> 16;
     bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i] >> 16;
   }
+  */
+
+  /* for teto */
+  for (int i = 0; i < 128; i++) {
+    uint8_t i2 = ((uint64_t)phaseAcc * 163) >> 32;
+    bigassBuffer[2 * i] = aaaaSample[2 * i2] * 0.25f;
+    bigassBuffer[(2 * i) + 1] = aaaaSample[(2 * i2) + 1] * 0.25f;
+    phaseAcc += phaseStep;
+  }
 }
 void fillSecondHalf() {
-
+  /*  for sine
+   *
   int32_t smallassBufferIN[128] = {0};
   int32_t smallassBufferOUT[128] = {0};
   for (int i = 0; i < 128; i++) {
@@ -139,6 +150,15 @@ void fillSecondHalf() {
 
     bigassBuffer[(2 * i) + 256] = smallassBufferOUT[i] >> 16;
     bigassBuffer[(2 * i) + 257] = smallassBufferOUT[i] >> 16;
+  }
+  */
+
+  /* for teto */
+  for (int i = 0; i < 128; i++) {
+    uint8_t i2 = ((uint64_t)phaseAcc * 163) >> 32;
+    bigassBuffer[2 * i + 256] = aaaaSample[2 * i2] * 0.25f;
+    bigassBuffer[(2 * i) + 257] = aaaaSample[2 * i2 + 1] * 0.25f;
+    phaseAcc += phaseStep;
   }
 }
 /* USER CODE END PFP */
@@ -199,17 +219,26 @@ int main(void) {
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_TIM_Base_Start_IT(&htim1);
   HAL_StatusTypeDef i2sStatus;
-  i2sStatus = HAL_I2S_Transmit_DMA(&hi2s2, aaaaSample, 326);
+  i2sStatus = HAL_I2S_Transmit_DMA(&hi2s2, bigassBuffer, 512);
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1) {
+    static uint8_t jj = 0;
 
     if (flagSet == 1) {
       flagSet = 0;
       HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6);
+
+      if (jj == 0) {
+        phaseStep = 25769803;
+        jj = 1;
+      } else {
+        phaseStep = 24427626;
+        jj = 0;
+      }
     }
 
     /* USER CODE END WHILE */
@@ -374,9 +403,9 @@ static void MX_TIM4_Init(void) {
 
   /* USER CODE END TIM4_Init 1 */
   htim4.Instance = TIM4;
-  htim4.Init.Prescaler = 170 - 1;
+  htim4.Init.Prescaler = 1680 - 1;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 65535;
+  htim4.Init.Period = 49999;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK) {

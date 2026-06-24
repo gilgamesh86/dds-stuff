@@ -18,8 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32g4xx_hal_cordic.h"
-#include "stm32g4xx_hal_def.h"
+#include "stm32g4xx_hal_tim.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -50,6 +49,7 @@ I2S_HandleTypeDef hi2s2;
 DMA_HandleTypeDef hdma_spi2_tx;
 
 TIM_HandleTypeDef htim1;
+TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
 
 UART_HandleTypeDef huart1;
@@ -57,13 +57,16 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 volatile uint8_t flagSet = 0;
 volatile uint8_t mainTimFlag = 0;
-int32_t phaseAcc = 0;
-int32_t phaseAcc2 = 0;
-int32_t phaseStep2 = 626349;
-int phaseStep = 20855814;
-int32_t vibrato = 0;
+volatile uint8_t scanFlag = 0;
+uint8_t prevState[8][6] = {0};
 
-int16_t bigassBuffer[512] = {0};
+volatile uint32_t phaseAcc = 0;
+volatile uint32_t phaseAcc2 = 0;
+volatile uint32_t phaseStep2 = 626349;
+volatile uint32_t phaseStep = 0;
+volatile int32_t vibrato = 0;
+
+volatile int16_t bigassBuffer[512] = {0};
 const int16_t aaaaSample[326] = {
     510,    510,    690,    690,    888,    888,    1212,   1212,   1541,
     1541,   1849,   1849,   2017,   2017,   2086,   2086,   1918,   1918,
@@ -123,6 +126,7 @@ static void MX_USART1_UART_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_I2S2_Init(void);
+static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 void fillFirstHalf() {
   /* this is for sine wave
@@ -207,7 +211,7 @@ int main(void) {
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  SystemCoreClockUpdate();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -225,6 +229,7 @@ int main(void) {
   MX_TIM4_Init();
   MX_TIM1_Init();
   MX_I2S2_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   CORDIC_ConfigTypeDef cordic;
   cordic.Function = CORDIC_FUNCTION_SINE;
@@ -239,6 +244,7 @@ int main(void) {
   }
   HAL_TIM_Base_Start_IT(&htim4);
   HAL_TIM_Base_Start_IT(&htim1);
+  HAL_TIM_Base_Start_IT(&htim2);
   HAL_StatusTypeDef i2sStatus;
   i2sStatus = HAL_I2S_Transmit_DMA(&hi2s2, bigassBuffer, 512);
 
@@ -262,6 +268,32 @@ int main(void) {
         jj = 0;
       }
       */
+    }
+
+    /* matrix scan + buffer filling */
+    if (scanFlag == 1) {
+      scanFlag = 0;
+      for (uint8_t i = 0; i < 8; i++) {
+        HAL_GPIO_WritePin(GPIOA, 0x00FF, 0);
+        HAL_GPIO_WritePin(GPIOA, 1 << i, 1);
+        /* Give time, if you skip this loop you will get ghost notes */
+        for (uint8_t d = 0; d < 25; d++) {
+          __NOP();
+        }
+        for (uint8_t j = 0; j < 6; j++) {
+          uint8_t pressed = HAL_GPIO_ReadPin(GPIOB, (1 << j));
+
+          if (pressed != prevState[i][j]) {
+            prevState[i][j] = pressed;
+
+            if (pressed) {
+              phaseStep = phaseTable[i][j];
+            } else {
+              phaseStep = 0;
+            }
+          }
+        }
+      }
     }
 
     /* USER CODE END WHILE */
@@ -409,6 +441,46 @@ static void MX_TIM1_Init(void) {
 }
 
 /**
+ * @brief TIM2 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM2_Init(void) {
+
+  /* USER CODE BEGIN TIM2_Init 0 */
+
+  /* USER CODE END TIM2_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM2_Init 1 */
+
+  /* USER CODE END TIM2_Init 1 */
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 167;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 2000;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK) {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK) {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK) {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM2_Init 2 */
+
+  /* USER CODE END TIM2_Init 2 */
+}
+
+/**
  * @brief TIM4 Initialization Function
  * @param None
  * @retval None
@@ -428,7 +500,7 @@ static void MX_TIM4_Init(void) {
   htim4.Instance = TIM4;
   htim4.Init.Prescaler = 1680 - 1;
   htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim4.Init.Period = 49999;
+  htim4.Init.Period = 19999;
   htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim4) != HAL_OK) {
@@ -526,12 +598,35 @@ static void MX_GPIO_Init(void) {
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOF_CLK_ENABLE();
+  __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOA_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA,
+                    GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+                        GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7,
+                    GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_6, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PA0 PA1 PA2 PA3
+                           PA4 PA5 PA6 PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+                        GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PB0 PB1 PB2 PB3
+                           PB4 PB5 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3 |
+                        GPIO_PIN_4 | GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC6 */
   GPIO_InitStruct.Pin = GPIO_PIN_6;
@@ -549,6 +644,9 @@ static void MX_GPIO_Init(void) {
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim->Instance == TIM4) {
     flagSet = 1;
+  }
+  if (htim->Instance == TIM2) {
+    scanFlag = 1;
   }
 }
 

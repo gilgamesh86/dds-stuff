@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stm32g4xx_hal_cordic.h"
+#include "stm32g4xx_hal_def.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -55,8 +57,12 @@ UART_HandleTypeDef huart1;
 /* USER CODE BEGIN PV */
 volatile uint8_t flagSet = 0;
 volatile uint8_t mainTimFlag = 0;
-uint32_t phaseAcc = 0;
-int phaseStep = 21743271;
+int32_t phaseAcc = 0;
+int32_t phaseAcc2 = 0;
+int32_t phaseStep2 = 626349;
+int phaseStep = 20855814;
+int32_t vibrato = 0;
+
 int16_t bigassBuffer[512] = {0};
 const int16_t aaaaSample[326] = {
     510,    510,    690,    690,    888,    888,    1212,   1212,   1541,
@@ -96,6 +102,16 @@ const int16_t aaaaSample[326] = {
     3964,   3964,   3315,   3315,   2574,   2574,   1870,   1870,   1360,
     1360,   994,    994,    642,    642,    325,    325,    166,    166,
     182,    182};
+uint32_t phaseTable[8][6] = {
+    {15624207, 24801882, 39370534, 62496826, 99207528, 157482134},
+    {16553270, 26276679, 41711627, 66213081, 105106715, 166846509},
+    {17537579, 27839171, 44191930, 70150316, 111356685, 176767719},
+    {18580418, 29494575, 46819719, 74321671, 117978298, 187278874},
+    {19685267, 31248413, 49603764, 78741067, 124993653, 198415056},
+    {20855814, 33106541, 52553357, 83423255, 132426162, 210213429},
+    {22095965, 35075158, 55678342, 88383859, 140300631, 222713370},
+    {23409859, 37160835, 58989149, 93639437, 148643341, 235956596},
+};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -121,7 +137,7 @@ void fillFirstHalf() {
                        HAL_MAX_DELAY);
 
   for (int i = 0; i < 128; i++) {
-    bigassBuffer[2 * i] = smallassBufferOUT[i] >> 16;
+    bigassBuffer[2:w * i] = smallassBufferOUT[i] >> 16;
     bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i] >> 16;
   }
   */
@@ -129,9 +145,12 @@ void fillFirstHalf() {
   /* for teto */
   for (int i = 0; i < 128; i++) {
     uint8_t i2 = ((uint64_t)phaseAcc * 163) >> 32;
-    bigassBuffer[2 * i] = aaaaSample[2 * i2] * 0.25f;
-    bigassBuffer[(2 * i) + 1] = aaaaSample[(2 * i2) + 1] * 0.25f;
-    phaseAcc += phaseStep;
+    bigassBuffer[2 * i] = aaaaSample[2 * i2] >> 2;
+    bigassBuffer[(2 * i) + 1] = aaaaSample[(2 * i2) + 1] >> 2;
+
+    HAL_CORDIC_Calculate(&hcordic, &phaseAcc2, &vibrato, 1, HAL_MAX_DELAY);
+    phaseAcc2 += phaseStep2;
+    phaseAcc += phaseStep + (int32_t)((int64_t)vibrato * phaseStep >> 31) / 100;
   }
 }
 void fillSecondHalf() {
@@ -156,9 +175,11 @@ void fillSecondHalf() {
   /* for teto */
   for (int i = 0; i < 128; i++) {
     uint8_t i2 = ((uint64_t)phaseAcc * 163) >> 32;
-    bigassBuffer[2 * i + 256] = aaaaSample[2 * i2] * 0.25f;
-    bigassBuffer[(2 * i) + 257] = aaaaSample[2 * i2 + 1] * 0.25f;
-    phaseAcc += phaseStep;
+    bigassBuffer[2 * i + 256] = aaaaSample[2 * i2] >> 2;
+    bigassBuffer[(2 * i) + 257] = aaaaSample[2 * i2 + 1] >> 2;
+    HAL_CORDIC_Calculate(&hcordic, &phaseAcc2, &vibrato, 1, HAL_MAX_DELAY);
+    phaseAcc2 += phaseStep2;
+    phaseAcc += phaseStep + (int32_t)((int64_t)vibrato * phaseStep >> 31) / 100;
   }
 }
 /* USER CODE END PFP */
@@ -232,6 +253,7 @@ int main(void) {
       flagSet = 0;
       HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_6);
 
+      /*
       if (jj == 0) {
         phaseStep = 25769803;
         jj = 1;
@@ -239,6 +261,7 @@ int main(void) {
         phaseStep = 24427626;
         jj = 0;
       }
+      */
     }
 
     /* USER CODE END WHILE */

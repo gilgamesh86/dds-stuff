@@ -59,9 +59,9 @@ DMA_HandleTypeDef hdma_i2c1_tx;
 I2S_HandleTypeDef hi2s2;
 DMA_HandleTypeDef hdma_spi2_tx;
 
-TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim7;
 
 UART_HandleTypeDef huart1;
 
@@ -76,7 +76,6 @@ volatile uint32_t phaseAcc2 = 0;
 volatile uint32_t phaseStep2 = 0;
 volatile uint32_t phaseStep = 0;
 volatile int32_t vibrato = 0;
-
 volatile int16_t bigassBuffer[512] = {0};
 const int16_t aaaaSample[326] = {
     510,    510,    690,    690,    888,    888,    1212,   1212,   1541,
@@ -128,6 +127,13 @@ uint32_t phaseTable[8][6] = {
 };
 uint32_t vibratoLUT[10] = {0,      89478,  178956, 268435, 357913,
                            447392, 536870, 626349, 715827, 805306};
+volatile uint32_t counter;
+
+volatile float attack;
+
+volatile uint8_t countFlag;
+volatile uint8_t tapFlag;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -137,12 +143,14 @@ static void MX_DMA_Init(void);
 static void MX_CORDIC_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM4_Init(void);
-static void MX_TIM1_Init(void);
 static void MX_I2S2_Init(void);
 static void MX_TIM2_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_ADC2_Init(void);
+static void MX_TIM7_Init(void);
 /* USER CODE BEGIN PFP */
+
+void countUp(void) { counter++; }
 
 void fillFirstHalf() {
   int32_t smallassBufferIN[128] = {0};
@@ -157,8 +165,8 @@ void fillFirstHalf() {
                        HAL_MAX_DELAY);
 
   for (int i = 0; i < 128; i++) {
-    bigassBuffer[2 * i] = smallassBufferOUT[i] >> 16;
-    bigassBuffer[(2 * i) + 1] = smallassBufferOUT[i] >> 16;
+    bigassBuffer[2 * i] = (smallassBufferOUT[i] >> 16) * attack;
+    bigassBuffer[(2 * i) + 1] = (smallassBufferOUT[i] >> 16) * attack;
   }
 
   /* Kasane teto just in case you need her
@@ -190,8 +198,8 @@ void fillSecondHalf() {
 
   for (int i = 0; i < 128; i++) {
 
-    bigassBuffer[(2 * i) + 256] = smallassBufferOUT[i] >> 16;
-    bigassBuffer[(2 * i) + 257] = smallassBufferOUT[i] >> 16;
+    bigassBuffer[(2 * i) + 256] = (smallassBufferOUT[i] >> 16) * attack;
+    bigassBuffer[(2 * i) + 257] = (smallassBufferOUT[i] >> 16) * attack;
   }
 
   /* kasane teto, just in case
@@ -204,6 +212,7 @@ void fillSecondHalf() {
     phaseAcc += phaseStep + (int32_t)((int64_t)vibrato * phaseStep >> 31) / 100;
   } */
 }
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -245,11 +254,11 @@ int main(void) {
   MX_CORDIC_Init();
   MX_USART1_UART_Init();
   MX_TIM4_Init();
-  MX_TIM1_Init();
   MX_I2S2_Init();
   MX_TIM2_Init();
   MX_I2C1_Init();
   MX_ADC2_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   CORDIC_ConfigTypeDef cordic;
   cordic.Function = CORDIC_FUNCTION_SINE;
@@ -263,7 +272,7 @@ int main(void) {
     Error_Handler();
   }
   HAL_TIM_Base_Start_IT(&htim4);
-  HAL_TIM_Base_Start_IT(&htim1);
+  HAL_TIM_Base_Start_IT(&htim7);
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_StatusTypeDef i2sStatus;
   i2sStatus = HAL_I2S_Transmit_DMA(&hi2s2, bigassBuffer, 512);
@@ -272,10 +281,13 @@ int main(void) {
   sprintf(textBuffer, "Hi lol");
   SH1106_Puts(textBuffer, &Font_11x18, SH1106_COLOR_WHITE);
   SH1106_UpdateScreen();
+
   uint32_t textCounter = 0;
   uint8_t vibratoPrev = 0;
   uint8_t vibratoCurr = 0;
   uint8_t vibratoState = 0;
+  uint8_t vibratoCounter = 0;
+  uint16_t attackCoeff = 1;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -316,23 +328,47 @@ int main(void) {
 
     if (vibratoCurr == 0 && vibratoPrev == 1) {
       vibratoState = !vibratoState;
+      vibratoCounter += 1;
     }
 
     vibratoPrev = vibratoCurr; // update state AFTER the edge check
-    if (vibratoState == 1) {
-      uint32_t ADCData = 0;
-      HAL_ADC_Start_DMA(&hadc2, &ADCData, 1);
+    if (vibratoState == 1 && vibratoCounter % 2 == 1 &&
+        vibratoCounter % 3 != 1) {
+
+      HAL_ADC_Start(&hadc2);
+      HAL_ADC_PollForConversion(&hadc2, HAL_MAX_DELAY);
+      uint32_t ADCData = HAL_ADC_GetValue(&hadc2);
+      HAL_ADC_Stop(&hadc2);
       sprintf(textBuffer, "VIBRATO: ");
       SH1106_Clear();
       SH1106_GotoXY(0, 0);
       SH1106_Puts(textBuffer, &Font_11x18, SH1106_COLOR_WHITE);
-      uint8_t vibratoInput = ((ADCData * 10) >> 12);
+      uint8_t vibratoInput = 9 - ((ADCData * 10) >> 12);
       sprintf(textBuffer, "%d", vibratoInput);
       SH1106_GotoXY(0, 19);
       SH1106_Puts(textBuffer, &Font_7x10, SH1106_COLOR_WHITE);
       SH1106_UpdateScreen();
       phaseStep2 = vibratoLUT[vibratoInput];
     }
+
+    if (vibratoState == 1 && vibratoCounter % 3 == 1) {
+
+      HAL_ADC_Start(&hadc2);
+      HAL_ADC_PollForConversion(&hadc2, HAL_MAX_DELAY);
+      uint32_t ADCData = HAL_ADC_GetValue(&hadc2);
+      HAL_ADC_Stop(&hadc2);
+      sprintf(textBuffer, "ATTACK: ");
+      SH1106_Clear();
+      SH1106_GotoXY(0, 0);
+      SH1106_Puts(textBuffer, &Font_11x18, SH1106_COLOR_WHITE);
+      uint8_t attackInput = 9 - ((ADCData * 10) >> 12);
+      sprintf(textBuffer, "%d00 ms", attackInput);
+      SH1106_GotoXY(0, 19);
+      SH1106_Puts(textBuffer, &Font_7x10, SH1106_COLOR_WHITE);
+      SH1106_UpdateScreen();
+      attackCoeff = 100 * attackInput + 1;
+    }
+
     /* matrix scan + buffer filling */
     if (scanFlag == 1) {
       scanFlag = 0;
@@ -340,7 +376,7 @@ int main(void) {
         HAL_GPIO_WritePin(GPIOA, 0x00FF, 0);
         HAL_GPIO_WritePin(GPIOA, 1 << i, 1);
         /* Give time, if you skip this loop you will get ghost notes */
-        for (uint8_t d = 0; d < 25; d++) {
+        for (uint8_t d = 0; d < 100; d++) {
           __NOP();
         }
         for (uint8_t j = 0; j < 6; j++) {
@@ -351,14 +387,26 @@ int main(void) {
 
             if (pressed) {
               phaseStep = phaseTable[i][j];
+              tapFlag = 1;
+              attack = 0.0f;
             } else {
               phaseStep = 0;
+              tapFlag = 0;
             }
           }
         }
       }
     }
+    // tapFlag = 0;
 
+    if (countFlag == 1) {
+      countFlag = 0;
+      if (tapFlag && attack < 1.0f) {
+        attack += 1.0f / (48 * attackCoeff);
+        if (attack >= 1.0f)
+          attack = 1.0f;
+      }
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -526,7 +574,6 @@ static void MX_I2C1_Init(void) {
     Error_Handler();
   }
   /* USER CODE BEGIN I2C1_Init 2 */
-
   /* USER CODE END I2C1_Init 2 */
 }
 
@@ -557,48 +604,6 @@ static void MX_I2S2_Init(void) {
   /* USER CODE BEGIN I2S2_Init 2 */
 
   /* USER CODE END I2S2_Init 2 */
-}
-
-/**
- * @brief TIM1 Initialization Function
- * @param None
- * @retval None
- */
-static void MX_TIM1_Init(void) {
-
-  /* USER CODE BEGIN TIM1_Init 0 */
-
-  /* USER CODE END TIM1_Init 0 */
-
-  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-  /* USER CODE BEGIN TIM1_Init 1 */
-
-  /* USER CODE END TIM1_Init 1 */
-  htim1.Instance = TIM1;
-  htim1.Init.Prescaler = 34;
-  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim1.Init.Period = 99;
-  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim1.Init.RepetitionCounter = 0;
-  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim1) != HAL_OK) {
-    Error_Handler();
-  }
-  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK) {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
-  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_UPDATE;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK) {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM1_Init 2 */
-
-  /* USER CODE END TIM1_Init 2 */
 }
 
 /**
@@ -679,6 +684,40 @@ static void MX_TIM4_Init(void) {
   /* USER CODE BEGIN TIM4_Init 2 */
 
   /* USER CODE END TIM4_Init 2 */
+}
+
+/**
+ * @brief TIM7 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_TIM7_Init(void) {
+
+  /* USER CODE BEGIN TIM7_Init 0 */
+
+  /* USER CODE END TIM7_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM7_Init 1 */
+
+  /* USER CODE END TIM7_Init 1 */
+  htim7.Instance = TIM7;
+  htim7.Init.Prescaler = 0;
+  htim7.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim7.Init.Period = 3499;
+  htim7.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim7) != HAL_OK) {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim7, &sMasterConfig) != HAL_OK) {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM7_Init 2 */
+
+  /* USER CODE END TIM7_Init 2 */
 }
 
 /**
@@ -821,6 +860,10 @@ static void MX_GPIO_Init(void) {
 
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  if (htim->Instance == TIM7) {
+    countUp();
+    countFlag = 1;
+  }
   if (htim->Instance == TIM4) {
     flagSet = 1;
   }

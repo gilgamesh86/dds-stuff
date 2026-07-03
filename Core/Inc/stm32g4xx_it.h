@@ -64,6 +64,7 @@ void TIM2_IRQHandler(void);
 void TIM4_IRQHandler(void);
 void I2C1_EV_IRQHandler(void);
 void SPI2_IRQHandler(void);
+void TIM7_IRQHandler(void);
 void CORDIC_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
